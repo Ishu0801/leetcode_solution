@@ -1,35 +1,22 @@
 class Solution {
 public:
-
-    int pivot_finder(vector<int>& nums,int low,int high){
-        int pivot = nums[low];
-        int i = low;
-        int j = high;
-        while(i<j){
-            while(nums[i]<=pivot && i < high){
-                i++;
+    void sortColors(vector<int>& arr) {
+        int low = 0;
+        int mid = 0;
+        int high = arr.size() - 1;
+        while( mid <= high ){
+            if(arr[mid] == 0){
+                swap( arr[ low ] , arr[ mid ] );
+                mid++;
+                low++;
             }
-            while(nums[j]>pivot && j > low){
-                j--;
+            else if( arr[ mid ] == 1 ){
+                mid++;
             }
-            if(i<j){
-                swap(nums[i],nums[j]);
+            else{
+                swap( arr[ high ] , arr[ mid ] );
+                high--;
             }
-        }
-        swap(nums[low],nums[j]);
-        return j;
-    }
-
-    void quick_sort(vector<int>& nums, int low , int high) {
-        if(low<high){
-            int pivot = pivot_finder(nums,low,high);
-            quick_sort(nums,low,pivot - 1);
-            quick_sort(nums,pivot+1,high);
         }
     }
-
-    void sortColors(vector<int>& nums) {
-        int high = nums.size()-1;
-        quick_sort(nums,0,high);
-        }
 };
